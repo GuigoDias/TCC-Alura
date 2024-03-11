@@ -32,4 +32,20 @@ public class Cliente {
         this.endereco = new Endereco(dados.dadosEndereco());
         this.ativo = true;
     }
+
+    public void atualizarInformacoes(DadosAtualizacaoCliente dados) {
+        if (dados.nome() != null){
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null){
+            this.telefone = dados.telefone();
+        }
+        if (dados.endereco() != null){
+            this.endereco.AtualizarEndereco(dados.endereco());
+        }
+    }
+
+    public void exclusao() {
+        this.ativo = false;
+    }
 }

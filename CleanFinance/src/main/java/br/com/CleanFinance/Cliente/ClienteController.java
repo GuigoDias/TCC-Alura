@@ -23,6 +23,20 @@ public class ClienteController {
 
     @GetMapping
     public Page<DadosListagemClientes> listarClientes(@PageableDefault(sort = {"nome"}) Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemClientes::new);
+        return repository.findAllByAtivaTrue(paginacao).map(DadosListagemClientes::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoCliente dados){
+        var cliente = repository.getReferenceById(dados.id());
+        cliente.atualizarInformacoes(dados);
+    }
+
+    @DeleteMapping("*/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        var cliente = repository.getReferenceById(id);
+        cliente.exclusao();
     }
 }
