@@ -23,7 +23,7 @@ public class ClienteController {
 
     @GetMapping
     public Page<DadosListagemClientes> listarClientes(@PageableDefault(sort = {"nome"}) Pageable paginacao){
-        return repository.findAllByAtivaTrue(paginacao).map(DadosListagemClientes::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemClientes::new);
     }
 
     @PutMapping
