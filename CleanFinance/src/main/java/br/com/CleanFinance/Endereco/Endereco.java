@@ -1,6 +1,7 @@
 package br.com.CleanFinance.Endereco;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Endereco {
+    @NotBlank
     private String cep;
+    @NotBlank
     private String logradouro;
+    @NotBlank
     private String numero;
+    @NotBlank
     private String bairro;
     private String complemento;
+    @NotBlank
     private String localidade;
+    @NotBlank
     private String uf;
 
     public Endereco(DadosEndereco dados) {

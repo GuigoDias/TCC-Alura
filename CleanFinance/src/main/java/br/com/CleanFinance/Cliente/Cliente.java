@@ -1,7 +1,10 @@
 package br.com.CleanFinance.Cliente;
 
+import br.com.CleanFinance.Cartao.Cartao;
 import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,9 +19,13 @@ import lombok.NoArgsConstructor;
 public class Cliente {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String nome;
+    @NotBlank
     private String cpf;
+    @NotBlank
     private String email;
+    @NotBlank
     private String telefone;
     @Embedded
     private Endereco endereco;
@@ -36,6 +43,9 @@ public class Cliente {
     public void atualizarInformacoes(DadosAtualizacaoCliente dados) {
         if (dados.nome() != null){
             this.nome = dados.nome();
+        }
+        if (dados.cpf() != null){
+            this.cpf = dados.cpf();
         }
         if (dados.telefone() != null){
             this.telefone = dados.telefone();

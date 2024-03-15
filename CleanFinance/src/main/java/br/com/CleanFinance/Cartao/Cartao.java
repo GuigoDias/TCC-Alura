@@ -21,13 +21,13 @@ import java.time.LocalDate;
 public class Cartao {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotBlank
     private String numero;
     @ManyToOne @NotBlank
     private Cliente cliente;
-    @NotNull
+    @NotBlank
     private String validade;
-    @NotNull
+    @NotBlank
     private String cvv;
     @NotNull
     private BigDecimal limite;

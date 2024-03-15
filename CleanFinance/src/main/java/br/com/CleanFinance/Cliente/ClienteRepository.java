@@ -6,4 +6,5 @@ import org.springframework.data.domain.Page;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Page<Cliente> findAllByAtivoTrue(Pageable paginacao);
+    Cliente findByCpf(String cpf);
 }

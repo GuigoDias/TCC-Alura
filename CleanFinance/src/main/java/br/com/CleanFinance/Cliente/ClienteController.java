@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("clientes")
+@RequestMapping("/clientes")
 public class ClienteController {
     @Autowired
     private ClienteRepository repository;
@@ -37,6 +37,15 @@ public class ClienteController {
     @Transactional
     public void excluir(@PathVariable Long id){
         var cliente = repository.getReferenceById(id);
-        cliente.exclusao();
+        //Invés de endereço, deve ser validado se possui Cartões,
+        // porém eu (Gui) não sei como fazer isso ainda
+        if (cliente.getEndereco() == null){
+            cliente.exclusao();
+        }
+    }
+
+    @GetMapping("/cpf/{cpf}")
+    public Cliente pesquisarPorCpf(@RequestBody @Valid String cpf){
+        return repository.findByCpf(cpf);
     }
 }
