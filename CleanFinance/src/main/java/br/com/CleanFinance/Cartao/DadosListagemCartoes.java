@@ -1,14 +1,12 @@
 package br.com.CleanFinance.Cartao;
 
-import br.com.CleanFinance.Cliente.Cliente;
+import java.math.BigDecimal;
 
-import java.time.LocalDate;
-
-public record DadosListagemCartoes (int numero,
-                                       Cliente cliente,
-                                       double limite,
-                                    LocalDate validade){
+public record DadosListagemCartoes (String numero,
+                                       String clienteNome,
+                                       BigDecimal limite,
+                                    String validade){
     public DadosListagemCartoes(Cartao cartao){
-        this(cartao.getNumero(),cartao.getCliente(),cartao.getLimite(),cartao.getValidade());
+        this(cartao.getNumero(),cartao.getCliente().getNome(),cartao.getLimite(),cartao.getValidade());
     }
 }

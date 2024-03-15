@@ -27,7 +27,7 @@ public class CartaoController {
     @PutMapping
     @Transactional
     public void ativarDesativar(@RequestBody @Valid DadosAtualizacaoCartao dados){
-        var cartao = repository.getReferenceById(dados.numero());
+        var cartao = repository.getReferenceById(dados.id());
         cartao.ativarOuDesativar(dados);
     }
 }

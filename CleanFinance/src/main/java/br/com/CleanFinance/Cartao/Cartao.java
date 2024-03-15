@@ -1,10 +1,7 @@
 package br.com.CleanFinance.Cartao;
 
 import br.com.CleanFinance.Cliente.Cliente;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Table(name = "clientes")
@@ -21,44 +19,46 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "numero")
 public class Cartao {
-    @Id @NotNull
-    private int numero;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
+    private String numero;
     @ManyToOne @NotBlank
     private Cliente cliente;
     @NotNull
-    private LocalDate validade;
+    private String validade;
     @NotNull
-    private int cvv;
+    private String cvv;
     @NotNull
-    private double limite;
+    private BigDecimal limite;
     @NotNull
     private boolean status;
 
     public Cartao(DadosCadastroCartao dados) {
         this.numero = criarNumero();
         this.cliente = dados.cliente();
-        this.validade = LocalDate.now();
+        this.validade = criarValidade();
         this.cvv = criarCvv();
         this.limite = dados.limite();
         this.status = true;
     }
 
-    private int criarNumero(){
+    private String criarNumero(){
         int numeroCompleto = 0;
         for (int num = 0;num < 16;num++){
            var numero = ((int) Math.random()*10);
            numeroCompleto =+ numero;
         }
-        return numeroCompleto;
+        return String.valueOf(numeroCompleto);
     }
 
-    private int criarCvv(){
+    private String criarCvv(){
         int numeroCompleto = 0;
         for (int num = 0;num < 3;num++){
             var numero = ((int) Math.random()*10);
             numeroCompleto =+ numero;
         }
-        return numeroCompleto;
+        return String.valueOf(numeroCompleto);
     }
 
     public void ativarOuDesativar(DadosAtualizacaoCartao dados) {
@@ -68,5 +68,12 @@ public class Cartao {
         if (dados.status() == false) {
             this.status = true;
         }
+    }
+
+    private String criarValidade(){
+        LocalDate data = LocalDate.now().plusYears(4).plusMonths(6);
+        String mes = String.format("%02d", data.getMonthValue());
+        String ano = String.valueOf(data.getYear());
+        return mes + "-" + ano;
     }
 }

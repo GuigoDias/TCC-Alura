@@ -1,6 +1,8 @@
 package br.com.CleanFinance.Cartao;
 
-public record DadosAtualizacaoCartao(int numero,
+import jakarta.validation.constraints.NotBlank;
+
+public record DadosAtualizacaoCartao(@NotBlank Long id,
                                      boolean status
                                      ) {
 

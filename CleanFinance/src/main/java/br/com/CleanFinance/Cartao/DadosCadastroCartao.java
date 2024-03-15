@@ -4,7 +4,9 @@ import br.com.CleanFinance.Cliente.Cliente;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastroCartao(@NotNull double limite,
+import java.math.BigDecimal;
+
+public record DadosCadastroCartao(@NotNull BigDecimal limite,
                                   @NotBlank
                                   Cliente cliente) {
 }
