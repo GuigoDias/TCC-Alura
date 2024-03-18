@@ -1,5 +1,7 @@
 package br.com.CleanFinance.Compra;
 
+import br.com.CleanFinance.Cartao.Cartao;
+import br.com.CleanFinance.Compra.CompraDadosRecords.DadosCadastroCompra;
 import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -25,12 +27,15 @@ public class Compra {
     private BigDecimal valor;
     @NotNull
     private LocalDateTime data;
+    @ManyToOne @NotNull
+    private Cartao cartao;
     @Embedded
     private Endereco estabelecimento;
     @NotBlank
     private String categoria;
 
     public Compra(DadosCadastroCompra dados) {
+        this.cartao = dados.cartao();
         this.valor = dados.valor();
         this.data = LocalDateTime.now();
         this.estabelecimento = dados.estabelecimento();

@@ -1,6 +1,9 @@
 package br.com.CleanFinance.Cartao;
 
+import br.com.CleanFinance.Cartao.CartaoDadosRecords.DadosAtualizacaoCartao;
+import br.com.CleanFinance.Cartao.CartaoDadosRecords.DadosCadastroCartao;
 import br.com.CleanFinance.Cliente.Cliente;
+import br.com.CleanFinance.Compra.Compra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Table(name = "clientes")
 @Entity
@@ -33,6 +37,8 @@ public class Cartao {
     private BigDecimal limite;
     @NotNull
     private boolean status;
+    @OneToMany
+    private List<Compra> compras;
 
     public Cartao(DadosCadastroCartao dados) {
         this.numero = criarNumero();

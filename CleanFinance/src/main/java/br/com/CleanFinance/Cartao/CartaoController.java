@@ -1,5 +1,7 @@
 package br.com.CleanFinance.Cartao;
 
+import br.com.CleanFinance.Cartao.CartaoDadosRecords.*;
+import br.com.CleanFinance.Compra.CompraRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class CartaoController {
     @Autowired
     private CartaoRepository repository;
+    @Autowired
+    private CompraRepository repositoryCompra;
+
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroCartao dados){
@@ -31,10 +36,10 @@ public class CartaoController {
         cartao.ativarOuDesativar(dados);
     }
 
-    @GetMapping("/{numero}")
-    public DadosCartao informarLimite(@RequestBody String numero){
+    @GetMapping("/alterarLimite/{numero}")
+    public DadosCartaoAlterarLimite informarLimite(@RequestBody String numero){
         var cartao = pesquisarPorNumero(numero);
-        return new DadosCartao(cartao);
+        return new DadosCartaoAlterarLimite(cartao);
     }
 
     @PutMapping("/alterarLimite")
@@ -42,6 +47,16 @@ public class CartaoController {
     public void alterandoLimite(@RequestBody DadosLimiteCartao dados){
         var cartao = pesquisarPorNumero(dados.numero());
         cartao.alterarLimite(dados.novoLimite());
+    }
+
+    @GetMapping("/informarFatura/{numero}")
+    public DadosCartaoPrepararFatura informacoesFatura(@RequestBody String numero){
+        var cartao = pesquisarPorNumero(numero);
+        return new DadosCartaoPrepararFatura(cartao);
+    }
+
+    public Page<CartaoListaFatura> listarCompras(@PageableDefault(sort = {"data"}) Pageable paginacao){
+        return repositoryCompra.findAll(paginacao).map(CartaoListaFatura::new);
     }
 
     public Cartao pesquisarPorNumero(@RequestBody @Valid String numero){

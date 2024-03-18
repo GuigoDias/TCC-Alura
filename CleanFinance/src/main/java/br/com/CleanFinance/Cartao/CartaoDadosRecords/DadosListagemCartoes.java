@@ -1,4 +1,6 @@
-package br.com.CleanFinance.Cartao;
+package br.com.CleanFinance.Cartao.CartaoDadosRecords;
+
+import br.com.CleanFinance.Cartao.Cartao;
 
 import java.math.BigDecimal;
 

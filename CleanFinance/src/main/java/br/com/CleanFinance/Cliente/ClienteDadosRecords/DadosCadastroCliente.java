@@ -1,4 +1,4 @@
-package br.com.CleanFinance.Cliente;
+package br.com.CleanFinance.Cliente.ClienteDadosRecords;
 
 import br.com.CleanFinance.Endereco.DadosEndereco;
 import jakarta.validation.Valid;

@@ -1,5 +1,6 @@
-package br.com.CleanFinance.Compra;
+package br.com.CleanFinance.Compra.CompraDadosRecords;
 
+import br.com.CleanFinance.Compra.Compra;
 import br.com.CleanFinance.Endereco.Endereco;
 
 import java.math.BigDecimal;

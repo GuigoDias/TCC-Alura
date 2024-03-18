@@ -1,6 +1,7 @@
 package br.com.CleanFinance.Compra;
 
-import br.com.CleanFinance.Cartao.DadosListagemCartoes;
+import br.com.CleanFinance.Compra.CompraDadosRecords.DadosCadastroCompra;
+import br.com.CleanFinance.Compra.CompraDadosRecords.DadosListagemCompras;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

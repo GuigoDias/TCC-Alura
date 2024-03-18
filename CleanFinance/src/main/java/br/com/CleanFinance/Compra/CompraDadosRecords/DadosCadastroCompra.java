@@ -1,4 +1,4 @@
-package br.com.CleanFinance.Compra;
+package br.com.CleanFinance.Compra.CompraDadosRecords;
 
 import br.com.CleanFinance.Cartao.Cartao;
 import br.com.CleanFinance.Endereco.Endereco;

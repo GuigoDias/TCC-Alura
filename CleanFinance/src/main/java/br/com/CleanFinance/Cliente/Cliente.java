@@ -1,6 +1,8 @@
 package br.com.CleanFinance.Cliente;
 
 import br.com.CleanFinance.Cartao.Cartao;
+import br.com.CleanFinance.Cliente.ClienteDadosRecords.DadosAtualizacaoCliente;
+import br.com.CleanFinance.Cliente.ClienteDadosRecords.DadosCadastroCliente;
 import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

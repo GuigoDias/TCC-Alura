@@ -1,4 +1,6 @@
-package br.com.CleanFinance.Cliente;
+package br.com.CleanFinance.Cliente.ClienteDadosRecords;
+
+import br.com.CleanFinance.Cliente.Cliente;
 
 public record DadosListagemClientes(
         String cpf,

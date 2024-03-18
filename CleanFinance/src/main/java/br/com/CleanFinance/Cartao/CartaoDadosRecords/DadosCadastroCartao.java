@@ -1,4 +1,4 @@
-package br.com.CleanFinance.Cartao;
+package br.com.CleanFinance.Cartao.CartaoDadosRecords;
 
 import br.com.CleanFinance.Cliente.Cliente;
 import jakarta.validation.constraints.NotBlank;
