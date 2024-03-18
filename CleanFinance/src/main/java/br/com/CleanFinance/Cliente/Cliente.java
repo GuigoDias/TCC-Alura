@@ -3,12 +3,13 @@ package br.com.CleanFinance.Cliente;
 import br.com.CleanFinance.Cartao.Cartao;
 import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table(name = "clientes")
 @Entity
@@ -29,6 +30,8 @@ public class Cliente {
     private String telefone;
     @Embedded
     private Endereco endereco;
+    @OneToMany
+    private List<Cartao> cartoes;
     private boolean ativo;
 
     public Cliente(DadosCadastroCliente dados) {

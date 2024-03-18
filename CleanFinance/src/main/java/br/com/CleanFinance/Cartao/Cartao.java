@@ -76,4 +76,10 @@ public class Cartao {
         String ano = String.valueOf(data.getYear());
         return mes + "-" + ano;
     }
+
+    public void alterarLimite(BigDecimal novoLimite) {
+        if (novoLimite != null){
+            this.limite = novoLimite;
+        }
+    }
 }

@@ -37,9 +37,7 @@ public class ClienteController {
     @Transactional
     public void excluir(@PathVariable Long id){
         var cliente = repository.getReferenceById(id);
-        //Invés de endereço, deve ser validado se possui Cartões,
-        // porém eu (Gui) não sei como fazer isso ainda
-        if (cliente.getEndereco() == null){
+        if (cliente.getCartoes() == null){
             cliente.exclusao();
         }
     }

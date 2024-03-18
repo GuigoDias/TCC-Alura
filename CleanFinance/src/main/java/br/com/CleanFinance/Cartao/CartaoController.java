@@ -24,10 +24,27 @@ public class CartaoController {
         return repository.findAll(paginacao).map(DadosListagemCartoes::new);
     }
 
-    @PutMapping
+    @PutMapping("/ativarOuDesativar")
     @Transactional
     public void ativarDesativar(@RequestBody @Valid DadosAtualizacaoCartao dados){
         var cartao = repository.getReferenceById(dados.id());
         cartao.ativarOuDesativar(dados);
+    }
+
+    @GetMapping("/{numero}")
+    public DadosCartao informarLimite(@RequestBody String numero){
+        var cartao = pesquisarPorNumero(numero);
+        return new DadosCartao(cartao);
+    }
+
+    @PutMapping("/alterarLimite")
+    @Transactional
+    public void alterandoLimite(@RequestBody DadosLimiteCartao dados){
+        var cartao = pesquisarPorNumero(dados.numero());
+        cartao.alterarLimite(dados.novoLimite());
+    }
+
+    public Cartao pesquisarPorNumero(@RequestBody @Valid String numero){
+        return repository.findByNumero(numero);
     }
 }
