@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Table(name = "clientes")
 @Entity
 @Getter
 @NoArgsConstructor

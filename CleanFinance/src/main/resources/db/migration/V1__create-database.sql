@@ -1,29 +1,29 @@
-CREATE TABLE Cliente (
-    ClienteID 	INT AUTO_INCREMENT PRIMARY KEY,
-    Nome 		VARCHAR(100),
-    CPF 		VARCHAR(11),
-    Email 		VARCHAR(100),
-    Telefone 	VARCHAR(11),
-    Endereco 	VARCHAR(100)
+CREATE TABLE cliente (
+    id                  INT AUTO_INCREMENT PRIMARY KEY,
+    nome 		        VARCHAR(100),
+    cpf 		        VARCHAR(14),
+    email 		        VARCHAR(100),
+    telefone 	        VARCHAR(15),
+    ativo               BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE Cartao (
-    CartaoID 		INT AUTO_INCREMENT PRIMARY KEY,
-    ClienteID 		INT,
-    Numero 			VARCHAR(16),
-    Validade 		VARCHAR(7),
-    CVV 			VARCHAR(3),
-    Limite 			DECIMAL(10,2),
-    Status 			BOOLEAN not null,
-    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
+CREATE TABLE cartao (
+    id       		    INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id 		    INT,
+    numero 			    VARCHAR(16),
+    validade 		    VARCHAR(7),
+    cvv 			    VARCHAR(3),
+    limite 			    DECIMAL(10,2),
+    status 			    BOOLEAN not null,
+    FOREIGN KEY (cliente_id) REFERENCES cliente(id)
 );
 
-CREATE TABLE Compra (
-    CompraID 	INT AUTO_INCREMENT PRIMARY KEY,
-    CartaoID 			INT,
-    Valor 				DECIMAL(10,2),
-    Data 				DATETIME,
-    Estabelecimento 	VARCHAR(150),
-    Categoria 			VARCHAR(90),
-    FOREIGN KEY (CartaoID) REFERENCES Cartao(CartaoID)
+CREATE TABLE compra (
+    id                  INT AUTO_INCREMENT PRIMARY KEY,
+    cartao_id 			INT,
+    valor 				DECIMAL(10,2),
+    data 				DATETIME,
+    estabelecimento 	VARCHAR(150),
+    categoria 			VARCHAR(90),
+    FOREIGN KEY (cartao_id) REFERENCES cartao(id)
 );

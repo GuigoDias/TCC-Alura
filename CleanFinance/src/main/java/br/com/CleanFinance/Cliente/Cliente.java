@@ -3,7 +3,6 @@ package br.com.CleanFinance.Cliente;
 import br.com.CleanFinance.Cartao.Cartao;
 import br.com.CleanFinance.Cliente.ClienteDadosRecords.DadosAtualizacaoCliente;
 import br.com.CleanFinance.Cliente.ClienteDadosRecords.DadosCadastroCliente;
-import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Table(name = "clientes")
 @Entity
 @Getter
 @NoArgsConstructor
@@ -30,8 +28,6 @@ public class Cliente {
     private String email;
     @NotBlank
     private String telefone;
-    @Embedded
-    private Endereco endereco;
     @OneToMany
     private List<Cartao> cartoes;
     private boolean ativo;
@@ -41,8 +37,6 @@ public class Cliente {
         this.cpf = dados.cpf();
         this.email = dados.email();
         this.telefone = dados.telefone();
-        this.endereco = new Endereco(dados.dadosEndereco());
-        this.ativo = true;
     }
 
     public void atualizarInformacoes(DadosAtualizacaoCliente dados) {
@@ -54,9 +48,6 @@ public class Cliente {
         }
         if (dados.telefone() != null){
             this.telefone = dados.telefone();
-        }
-        if (dados.endereco() != null){
-            this.endereco.AtualizarEndereco(dados.endereco());
         }
     }
 

@@ -15,8 +15,5 @@ public record DadosCadastroCliente(
                                     @Email
                                    String email,
                                    @Pattern(regexp = "^\\(\\d{2}\\)\\s?\\d{4,5}-\\d{4}$")
-                                   String telefone,
-                                   @NotNull
-                                    @Valid
-                                   DadosEndereco dadosEndereco) {
+                                   String telefone) {
 }

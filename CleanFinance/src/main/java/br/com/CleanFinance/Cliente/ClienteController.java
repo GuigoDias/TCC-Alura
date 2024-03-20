@@ -22,7 +22,7 @@ public class ClienteController {
         repository.save(new Cliente(dados));
     }
 
-    @GetMapping
+    @GetMapping("/listaClientes")
     public Page<DadosListagemClientes> listarClientes(@PageableDefault(sort = {"nome"}) Pageable paginacao){
         return repository.findAllByAtivoTrue(paginacao).map(DadosListagemClientes::new);
     }
