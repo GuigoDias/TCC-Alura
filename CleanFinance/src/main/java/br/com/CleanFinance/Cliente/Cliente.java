@@ -37,6 +37,7 @@ public class Cliente {
         this.cpf = dados.cpf();
         this.email = dados.email();
         this.telefone = dados.telefone();
+        this.ativo = true;
     }
 
     public void atualizarInformacoes(DadosAtualizacaoCliente dados) {
