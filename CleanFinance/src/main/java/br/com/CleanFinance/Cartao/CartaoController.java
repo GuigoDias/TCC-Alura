@@ -1,6 +1,7 @@
 package br.com.CleanFinance.Cartao;
 
 import br.com.CleanFinance.Cartao.CartaoDadosRecords.*;
+import br.com.CleanFinance.Cliente.ClienteRepository;
 import br.com.CleanFinance.Compra.CompraRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,17 @@ public class CartaoController {
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroCartao dados){
-        repository.save(new Cartao(dados));
+        Cartao cartao = new Cartao(dados);
+        var procurandoNumero = pesquisarPorNumero(cartao.getNumero());
+        if (procurandoNumero == null) {
+            repository.save(cartao);
+        } else {
+            System.out.println("Houve um problema durante a criação, tente novamente!");;
+        }
     }
 
     @GetMapping
-    public Page<DadosListagemCartoes> listarCartoes(@PageableDefault(sort = {"nome","numero"}) Pageable paginacao){
+    public Page<DadosListagemCartoes> listarCartoes(@PageableDefault(sort = {"numero"}) Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemCartoes::new);
     }
 

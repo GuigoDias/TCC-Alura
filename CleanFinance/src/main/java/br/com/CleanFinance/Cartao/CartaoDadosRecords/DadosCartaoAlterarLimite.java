@@ -8,14 +8,12 @@ public record DadosCartaoAlterarLimite(
         String numero,
         BigDecimal limite,
         String validade,
-        String nomeCliente,
-        String cpfCliente
+        Long clienteId
 ) {
     public DadosCartaoAlterarLimite(Cartao cartao){
         this(cartao.getNumero(),
                 cartao.getLimite(),
                 cartao.getValidade(),
-                cartao.getCliente().getNome(),
-                cartao.getCliente().getCpf());
+                cartao.getClienteId());
     }
 }

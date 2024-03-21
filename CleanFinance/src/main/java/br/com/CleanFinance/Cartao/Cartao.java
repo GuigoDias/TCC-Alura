@@ -2,7 +2,6 @@ package br.com.CleanFinance.Cartao;
 
 import br.com.CleanFinance.Cartao.CartaoDadosRecords.DadosAtualizacaoCartao;
 import br.com.CleanFinance.Cartao.CartaoDadosRecords.DadosCadastroCartao;
-import br.com.CleanFinance.Cliente.Cliente;
 import br.com.CleanFinance.Compra.Compra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -26,8 +25,9 @@ public class Cartao {
     private Long id;
     @NotBlank
     private String numero;
-    @ManyToOne @NotBlank
-    private Cliente cliente;
+    @NotNull
+    @Column(name = "cliente_id")
+    private Long clienteId;
     @NotBlank
     private String validade;
     @NotBlank
@@ -41,7 +41,7 @@ public class Cartao {
 
     public Cartao(DadosCadastroCartao dados) {
         this.numero = criarNumero();
-        this.cliente = dados.cliente();
+        this.clienteId = dados.clienteId();
         this.validade = criarValidade();
         this.cvv = criarCvv();
         this.limite = dados.limite();
@@ -49,21 +49,21 @@ public class Cartao {
     }
 
     private String criarNumero(){
-        int numeroCompleto = 0;
+        String numeroCompleto = "";
         for (int num = 0;num < 16;num++){
-           var numero = ((int) Math.random()*10);
-           numeroCompleto =+ numero;
+           var numero = String.valueOf((int)(Math.random()*10));
+           numeroCompleto += numero;
         }
-        return String.valueOf(numeroCompleto);
+        return numeroCompleto;
     }
 
     private String criarCvv(){
-        int numeroCompleto = 0;
+        String numeroCompleto = "";
         for (int num = 0;num < 3;num++){
-            var numero = ((int) Math.random()*10);
-            numeroCompleto =+ numero;
+            var numero = String.valueOf((int)(Math.random()*10));
+            numeroCompleto += numero;
         }
-        return String.valueOf(numeroCompleto);
+        return numeroCompleto;
     }
 
     public void ativarOuDesativar(DadosAtualizacaoCartao dados) {

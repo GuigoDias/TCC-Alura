@@ -9,12 +9,10 @@ import java.util.List;
 
 public record DadosCartaoPrepararFatura(
         String numero,
-        String nomeCliente,
-        String cpfCliente
+        Long clienteId
 ) {
     public DadosCartaoPrepararFatura(Cartao cartao){
         this(cartao.getNumero(),
-                cartao.getCliente().getNome(),
-                cartao.getCliente().getCpf());
+                cartao.getClienteId());
     }
 }

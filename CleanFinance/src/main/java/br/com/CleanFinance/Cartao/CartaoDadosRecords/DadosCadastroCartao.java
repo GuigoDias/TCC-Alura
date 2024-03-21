@@ -12,6 +12,6 @@ public record DadosCadastroCartao(@NotNull
                                   @Positive
                                   @NumberFormat(style = NumberFormat.Style.CURRENCY)
                                   BigDecimal limite,
-                                  @NotBlank
-                                  Cliente cliente) {
+                                  @NotNull
+                                  Long clienteId) {
 }
