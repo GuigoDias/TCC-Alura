@@ -1,18 +1,14 @@
 package br.com.CleanFinance.Cartao.CartaoDadosRecords;
 
 import br.com.CleanFinance.Cartao.Cartao;
-import br.com.CleanFinance.Compra.Compra;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
+import br.com.CleanFinance.Cliente.Cliente;
 
 public record DadosCartaoPrepararFatura(
         String numero,
-        Long clienteId
+        Cliente cliente
 ) {
     public DadosCartaoPrepararFatura(Cartao cartao){
         this(cartao.getNumero(),
-                cartao.getClienteId());
+                cartao.getCliente());
     }
 }

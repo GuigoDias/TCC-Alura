@@ -1,7 +1,7 @@
 package br.com.CleanFinance.Cartao;
 
-import br.com.CleanFinance.Cartao.CartaoDadosRecords.DadosAtualizacaoCartao;
 import br.com.CleanFinance.Cartao.CartaoDadosRecords.DadosCadastroCartao;
+import br.com.CleanFinance.Cliente.Cliente;
 import br.com.CleanFinance.Compra.Compra;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -26,8 +26,8 @@ public class Cartao {
     @NotBlank
     private String numero;
     @NotNull
-    @Column(name = "cliente_id")
-    private Long clienteId;
+    @ManyToOne
+    private Cliente cliente;
     @NotBlank
     private String validade;
     @NotBlank
@@ -41,7 +41,7 @@ public class Cartao {
 
     public Cartao(DadosCadastroCartao dados) {
         this.numero = criarNumero();
-        this.clienteId = dados.clienteId();
+        this.cliente = dados.cliente();
         this.validade = criarValidade();
         this.cvv = criarCvv();
         this.limite = dados.limite();
@@ -66,12 +66,15 @@ public class Cartao {
         return numeroCompleto;
     }
 
-    public void ativarOuDesativar(DadosAtualizacaoCartao dados) {
-        if (dados.status() == true){
-            this.status = false;
-        }
-        if (dados.status() == false) {
+    public void ativarCartao() {
+        if (this.status == false) {
             this.status = true;
+        }
+    }
+
+    public void desativarCartao() {
+        if (this.status == true) {
+            this.status = false;
         }
     }
 

@@ -1,6 +1,5 @@
 package br.com.CleanFinance.Cartao.CartaoDadosRecords;
 
-import br.com.CleanFinance.Cartao.Cartao;
 import br.com.CleanFinance.Compra.Compra;
 import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.validation.constraints.NotNull;

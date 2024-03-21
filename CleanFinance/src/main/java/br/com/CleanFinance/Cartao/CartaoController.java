@@ -1,13 +1,13 @@
 package br.com.CleanFinance.Cartao;
 
 import br.com.CleanFinance.Cartao.CartaoDadosRecords.*;
-import br.com.CleanFinance.Cliente.ClienteRepository;
 import br.com.CleanFinance.Compra.CompraRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +21,14 @@ public class CartaoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroCartao dados){
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroCartao dados){
         Cartao cartao = new Cartao(dados);
         var procurandoNumero = pesquisarPorNumero(cartao.getNumero());
         if (procurandoNumero == null) {
             repository.save(cartao);
+            return ResponseEntity.ok().build();
         } else {
-            System.out.println("Houve um problema durante a criação, tente novamente!");;
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -36,15 +37,22 @@ public class CartaoController {
         return repository.findAll(paginacao).map(DadosListagemCartoes::new);
     }
 
-    @PutMapping("/ativarOuDesativar")
+    @PutMapping("/ativar/{id}")
     @Transactional
-    public void ativarDesativar(@RequestBody @Valid DadosAtualizacaoCartao dados){
-        var cartao = repository.getReferenceById(dados.id());
-        cartao.ativarOuDesativar(dados);
+    public void ativar(@PathVariable("id") @Valid Long id){
+        var cartao = repository.getReferenceById(id);
+        cartao.ativarCartao();
+    }
+
+    @PutMapping("/desativar/{id}")
+    @Transactional
+    public void desativar(@PathVariable("id") @Valid Long id){
+        var cartao = repository.getReferenceById(id);
+        cartao.desativarCartao();
     }
 
     @GetMapping("/alterarLimite/{numero}")
-    public DadosCartaoAlterarLimite informarLimite(@RequestBody String numero){
+    public DadosCartaoAlterarLimite informarLimite(@PathVariable("numero") String numero){
         var cartao = pesquisarPorNumero(numero);
         return new DadosCartaoAlterarLimite(cartao);
     }
