@@ -47,6 +47,9 @@ public class Cliente {
         if (dados.cpf() != null){
             this.cpf = dados.cpf();
         }
+        if (dados.email() != null){
+            this.email = dados.email();
+        }
         if (dados.telefone() != null){
             this.telefone = dados.telefone();
         }

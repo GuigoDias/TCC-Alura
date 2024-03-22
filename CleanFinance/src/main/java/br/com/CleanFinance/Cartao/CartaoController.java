@@ -32,8 +32,8 @@ public class CartaoController {
         }
     }
 
-    @GetMapping
-    public Page<DadosListagemCartoes> listarCartoes(@PageableDefault(sort = {"numero"}) Pageable paginacao){
+    @GetMapping("/listaCartoes")
+    public Page<DadosListagemCartoes> listarCartoes(@PageableDefault(sort = {"cliente","numero"}) Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemCartoes::new);
     }
 
@@ -65,16 +65,17 @@ public class CartaoController {
     }
 
     @GetMapping("/informarFatura/{numero}")
-    public DadosCartaoPrepararFatura informacoesFatura(@RequestBody String numero){
+    public DadosCartaoPrepararFatura informacoesFatura(@PathVariable("numero") String numero){
         var cartao = pesquisarPorNumero(numero);
         return new DadosCartaoPrepararFatura(cartao);
     }
 
+    @GetMapping("/listarFatura")
     public Page<CartaoListaFatura> listarCompras(@PageableDefault(sort = {"data"}) Pageable paginacao){
         return repositoryCompra.findAll(paginacao).map(CartaoListaFatura::new);
     }
 
-    public Cartao pesquisarPorNumero(@RequestBody @Valid String numero){
+    public Cartao pesquisarPorNumero(String numero){
         return repository.findByNumero(numero);
     }
 }

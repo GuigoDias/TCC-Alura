@@ -6,5 +6,5 @@ public record DadosAtualizacaoCliente(@NotNull Long id,
                                       String cpf,
                                       String nome,
                                       String telefone,
-                                      String endereco) {
+                                      String email) {
 }

@@ -5,10 +5,10 @@ import br.com.CleanFinance.Cliente.Cliente;
 
 public record DadosCartaoPrepararFatura(
         String numero,
-        Cliente cliente
+        String cliente
 ) {
     public DadosCartaoPrepararFatura(Cartao cartao){
         this(cartao.getNumero(),
-                cartao.getCliente());
+                cartao.getCliente().getNome());
     }
 }
