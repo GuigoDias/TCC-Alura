@@ -1,14 +1,13 @@
 package br.com.CleanFinance.Compra.CompraDadosRecords;
 
 import br.com.CleanFinance.Compra.Compra;
-import br.com.CleanFinance.Endereco.Endereco;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record DadosListagemCompras(
         BigDecimal valor,
         LocalDateTime data,
-        Endereco estabelecimento,
+        String estabelecimento,
         String categoria
 ) {
     public DadosListagemCompras(Compra compra) {

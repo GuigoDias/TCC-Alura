@@ -2,7 +2,6 @@ package br.com.CleanFinance.Compra;
 
 import br.com.CleanFinance.Cartao.Cartao;
 import br.com.CleanFinance.Compra.CompraDadosRecords.DadosCadastroCompra;
-import br.com.CleanFinance.Endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,8 +27,7 @@ public class Compra {
     private LocalDateTime data;
     @ManyToOne @NotNull
     private Cartao cartao;
-    @Embedded
-    private Endereco estabelecimento;
+    private String estabelecimento;
     @NotBlank
     private String categoria;
 
