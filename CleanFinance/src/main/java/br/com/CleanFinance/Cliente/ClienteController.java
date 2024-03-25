@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/clientes")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class ClienteController {
     @Autowired
     private ClienteRepository repository;
 
-    @PostMapping
     @Transactional
+    @PostMapping("/cadastrar")
     public ResponseEntity<Object> cadastrar(@RequestBody @Valid DadosCadastroCliente dados) {
         Cliente cliente = new Cliente(dados);
         var pesquisando = pesquisarPorCpf(cliente.getCpf());

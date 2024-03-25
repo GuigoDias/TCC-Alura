@@ -6,11 +6,11 @@ import br.com.CleanFinance.Cliente.Cliente;
 import java.math.BigDecimal;
 
 public record DadosListagemCartoes (String numero,
-                                       Cliente cliente,
+                                       String cliente,
                                        BigDecimal limite,
                                     String cvv,
                                     String validade){
     public DadosListagemCartoes(Cartao cartao){
-        this(cartao.getNumero(),cartao.getCliente(),cartao.getLimite(),cartao.getCvv(),cartao.getValidade());
+        this(cartao.getNumero(),cartao.getCliente().getNome(),cartao.getLimite(),cartao.getCvv(),cartao.getValidade());
     }
 }
