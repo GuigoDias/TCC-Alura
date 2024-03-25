@@ -8,7 +8,7 @@ CREATE TABLE cliente (
 );
 
 CREATE TABLE cartao (
-    id       		    INT AUTO_INCREMENT PRIMARY KEY,
+    cartao_id           INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id 		    INT NOT NULL,
     numero 			    VARCHAR(16) NOT NULL,
     validade 		    VARCHAR(7) NOT NULL,
@@ -25,5 +25,5 @@ CREATE TABLE compra (
     data 				DATETIME,
     estabelecimento 	VARCHAR(150) NOT NULL,
     categoria 			VARCHAR(90) NOT NULL,
-    FOREIGN KEY (cartao_id) REFERENCES cartao(id)
+    FOREIGN KEY (cartao_id) REFERENCES cartao(cartao_id)
 );

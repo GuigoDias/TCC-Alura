@@ -22,6 +22,7 @@ import java.util.List;
 @EqualsAndHashCode(of = "numero")
 public class Cartao {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cartao_id")
     private Long id;
     @NotBlank
     private String numero;
