@@ -39,20 +39,21 @@ public class ClienteController {
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoCliente dados) {
+    public ResponseEntity<Object> atualizar(@RequestBody @Valid DadosAtualizacaoCliente dados) {
         var cliente = repository.getReferenceById(dados.id());
         cliente.atualizarInformacoes(dados);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> excluir(@PathVariable("id") Long id) {
         var cliente = repository.getReferenceById(id);
             cliente.exclusao();
             return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/cpf/{cpf}")
+    @GetMapping("/clientes/procurarPorCpf/{cpf}")
     public Cliente pesquisarPorCpf(@RequestBody @Valid String cpf) {
         return repository.findByCpf(cpf);
     }
