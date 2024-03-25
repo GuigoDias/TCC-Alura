@@ -14,7 +14,7 @@ public record DadosCadastroCompra(
         @Positive
         @NumberFormat(style = NumberFormat.Style.CURRENCY)
         BigDecimal valor,
-        @NotNull
+        @NotBlank
         String categoria,
         @NotBlank
         String estabelecimento
