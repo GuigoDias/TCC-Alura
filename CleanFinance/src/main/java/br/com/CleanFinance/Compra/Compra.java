@@ -25,14 +25,14 @@ public class Compra {
     private BigDecimal valor;
     @NotNull
     private LocalDateTime data;
-    @ManyToOne @NotNull
+    @ManyToOne @NotNull @JoinColumn(name = "cartao_id")
     private Cartao cartao;
     private String estabelecimento;
     @NotBlank
     private String categoria;
 
     public Compra(DadosCadastroCompra dados) {
-        this.cartao = dados.cartao();
+        this.cartao = dados.cartao_id();
         this.valor = dados.valor();
         this.data = LocalDateTime.now();
         this.estabelecimento = dados.estabelecimento();

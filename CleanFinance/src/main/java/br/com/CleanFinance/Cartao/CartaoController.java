@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cartoes")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class CartaoController {
     @Autowired
     private CartaoRepository repository;
@@ -21,7 +22,6 @@ public class CartaoController {
 
     @PostMapping("/cadastrar")
     @Transactional
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroCartao dados){
         Cartao cartao = new Cartao(dados);
         var procurandoNumero = pesquisarPorNumero(cartao.getNumero());
