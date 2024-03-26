@@ -19,6 +19,7 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class Cliente {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @NotBlank
     private String nome;
